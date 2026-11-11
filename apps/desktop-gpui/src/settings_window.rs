@@ -36,7 +36,7 @@ use crate::{
     main_window::Mode,
     sign_in::{SignIn, SignInEvent, SignInOrigin, SignInOutcome},
     store::{
-        self, AppTheme, DEFAULT_PROJECT_NAME_TEMPLATE, DEFAULT_SERVER_URL, GENERAL_SETTINGS,
+        self, AppTheme, DEFAULT_PROJECT_NAME_TEMPLATE, GENERAL_SETTINGS, INITIAL_SERVER_URL,
         GeneralSettings, MainWindowStartBehaviour, PostDeletionBehaviour, RECORDING_START_SAFETY,
         SettingsEnum, StudioQuality, UpdateChannel, UpdateDownloadPolicy, WindowCaptureStyle,
         WindowExclusion,
@@ -4622,18 +4622,18 @@ impl SettingsWindow {
                         "server-url-reset",
                         (ui::ButtonVariant::Gray, None),
                         tr::common::reset_to_default(),
-                        stored == DEFAULT_SERVER_URL && draft == DEFAULT_SERVER_URL,
+                        stored == INITIAL_SERVER_URL && draft == INITIAL_SERVER_URL,
                         cx,
                         |this, window, cx| {
-                            if this.settings.server_url == DEFAULT_SERVER_URL {
-                                this.server_url = DEFAULT_SERVER_URL.to_string();
+                            if this.settings.server_url == INITIAL_SERVER_URL {
+                                this.server_url = INITIAL_SERVER_URL.to_string();
                                 let input = this.server_url_input.clone();
                                 input
-                                    .update(cx, |input, cx| input.set_text(DEFAULT_SERVER_URL, cx));
+                                    .update(cx, |input, cx| input.set_text(INITIAL_SERVER_URL, cx));
                                 cx.notify();
                                 return;
                             }
-                            this.confirm_server_url(DEFAULT_SERVER_URL.to_string(), window, cx);
+                            this.confirm_server_url(INITIAL_SERVER_URL.to_string(), window, cx);
                         },
                     ))
                     .child(self.button(

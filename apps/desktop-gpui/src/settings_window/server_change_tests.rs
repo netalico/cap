@@ -89,7 +89,7 @@ fn cancelling_a_server_change_keeps_the_account(cx: &mut gpui::TestAppContext) {
     cx.simulate_prompt_answer(tr::common::cancel());
     cx.run_until_parked();
 
-    assert_eq!(crate::auth::server_url(), DEFAULT_SERVER_URL);
+    assert_eq!(crate::auth::server_url(), INITIAL_SERVER_URL);
     assert!(store::auth_snapshot().signed_in());
     settings.read_with(cx, |settings, _| {
         assert!(settings.has_cap_pro);
@@ -109,8 +109,8 @@ fn server_change_stops_when_sign_out_cannot_be_saved(cx: &mut gpui::TestAppConte
     cx.run_until_parked();
 
     settings.read_with(cx, |settings, _| {
-        assert_eq!(settings.server_url, DEFAULT_SERVER_URL);
-        assert_eq!(settings.settings.server_url, DEFAULT_SERVER_URL);
+        assert_eq!(settings.server_url, INITIAL_SERVER_URL);
+        assert_eq!(settings.settings.server_url, INITIAL_SERVER_URL);
         assert!(settings.has_cap_pro);
         assert!(settings.user_profile.is_some());
     });

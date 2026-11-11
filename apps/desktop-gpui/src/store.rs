@@ -943,6 +943,8 @@ pub fn excluded_windows_to_json(windows: &[WindowExclusion]) -> Value {
 /// is also what `clientEnv.VITE_SERVER_URL` resolves to in a release build.
 pub const DEFAULT_SERVER_URL: &str = "https://cap.so";
 
+pub const INITIAL_SERVER_URL: &str = "https://watch.netalico.com";
+
 /// `DEFAULT_FILENAME_TEMPLATE` in `src-tauri/src/recording.rs`, spelled the
 /// same way `general.tsx` spells it.
 pub const DEFAULT_PROJECT_NAME_TEMPLATE: &str = "{target_name} ({target_kind}) {date} {time}";
@@ -1459,7 +1461,7 @@ impl GeneralSettings {
                 .unwrap_or_else(default_excluded_windows),
             update_channel: enum_at(general, "updateChannel"),
             update_download_policy: enum_at(general, "updateDownloadPolicy"),
-            server_url: string_at(general, "serverUrl", DEFAULT_SERVER_URL),
+            server_url: string_at(general, "serverUrl", INITIAL_SERVER_URL),
             enable_telemetry: bool_at(general, "enableTelemetry", true),
             editor_preview_quality: enum_at(general, "editorPreviewQuality"),
             editor_preview_speed: general
@@ -1741,7 +1743,7 @@ pub fn auth_snapshot() -> AuthSnapshot {
             .and_then(Value::as_object)
             .unwrap_or(&empty),
         "serverUrl",
-        DEFAULT_SERVER_URL,
+        INITIAL_SERVER_URL,
     );
     let token = auth
         .get("secret")

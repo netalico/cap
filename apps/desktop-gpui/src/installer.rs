@@ -12,8 +12,8 @@ use serde::Deserialize;
 
 use crate::store::UpdateChannel;
 
-const UPDATE_ENDPOINT: &str = "https://cdn.crabnebula.app/update/cap/cap";
-const UPDATER_PUBLIC_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUyOTAzOTdFNzJFQkRFOTMKUldTVDN1dHlmam1RNHFXb1VYTXlrQk1iMFFkcjN0YitqZlA5WnZNY0ZtQ1dvM1dxK211M3VIYUQK";
+const UPDATE_ENDPOINT: &str = "https://watch-updates.netalico.com/update";
+const UPDATER_PUBLIC_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUwQ0NCMzI1NDRBNTIwOEMKUldTTUlLVkVKYlBNVU5JMFlNV1ZNQWtFWkVHNWlrLzJJNkdlVWZsVzN2ZmZoYVBYNitwc09SaUYK";
 const CONNECT_TIMEOUT: Duration = Duration::from_secs(15);
 const METADATA_TIMEOUT: Duration = Duration::from_secs(20);
 const CHUNK_TIMEOUT: Duration = Duration::from_secs(60);
@@ -704,11 +704,11 @@ mod tests {
         let current = Version::parse("0.6.2-nightly.4").unwrap();
         assert_eq!(
             endpoint("darwin-aarch64", UpdateChannel::Stable, &current),
-            "https://cdn.crabnebula.app/update/cap/cap/darwin-aarch64/0.6.2-nightly.4"
+            "https://watch-updates.netalico.com/update/darwin-aarch64/0.6.2-nightly.4"
         );
         assert_eq!(
             endpoint("windows-x86_64", UpdateChannel::Nightly, &current),
-            "https://cdn.crabnebula.app/update/cap/cap/windows-x86_64/0.6.2-nightly.4?channel=nightly"
+            "https://watch-updates.netalico.com/update/windows-x86_64/0.6.2-nightly.4?channel=nightly"
         );
     }
 

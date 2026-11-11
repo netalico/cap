@@ -10,7 +10,7 @@ use std::time::{Duration, Instant};
 use futures_util::future::{Either, select};
 use serde_json::{Value, json};
 
-use crate::store::{self, DEFAULT_SERVER_URL};
+use crate::store::{self, DEFAULT_SERVER_URL, INITIAL_SERVER_URL};
 
 pub const PRICING_URL: &str = "https://cap.so/pricing?ref=desktop";
 
@@ -261,7 +261,7 @@ pub fn server_url() -> String {
 
 fn normalize_server_url(url: &str) -> String {
     if url.trim().is_empty() {
-        DEFAULT_SERVER_URL.to_string()
+        INITIAL_SERVER_URL.to_string()
     } else {
         url.trim_end_matches('/').to_string()
     }
