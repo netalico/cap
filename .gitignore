@@ -80,3 +80,4 @@ analysis/plans/
 tmp/
 
 __pycache__/
+netalico-dist/
