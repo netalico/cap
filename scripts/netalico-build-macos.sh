@@ -19,6 +19,9 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 export PATH="/opt/homebrew/bin:$HOME/.cargo/bin:$HOME/.bun/bin:$PATH"
 export RUST_TARGET_TRIPLE="$TARGET"
+# macOS 27 hosts: rustc rejects proc-macro dylibs whenever MACOSX_DEPLOYMENT_TARGET
+# differs from its 11.0 default (E0463). Info.plist still enforces 12.3.
+export CAP_MACOSX_DEPLOYMENT_TARGET="${CAP_MACOSX_DEPLOYMENT_TARGET:-11.0}"
 BUNDLE="apps/desktop-gpui/target/$TARGET/release/bundle"
 VERSION="$(sed -n 's/^version = "\(.*\)"$/\1/p' apps/desktop-gpui/Cargo.toml | head -1)"
 OUT="$REPO_ROOT/netalico-dist/$VERSION"

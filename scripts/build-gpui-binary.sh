@@ -35,7 +35,7 @@ fi
 
 extension=""
 if [[ "$target" == *-apple-darwin ]]; then
-	MACOSX_DEPLOYMENT_TARGET="$(node "$repo_root/scripts/build-macos-packages.mjs" --deployment-target)"
+	MACOSX_DEPLOYMENT_TARGET="${CAP_MACOSX_DEPLOYMENT_TARGET:-$(node "$repo_root/scripts/build-macos-packages.mjs" --deployment-target)}"
 	export MACOSX_DEPLOYMENT_TARGET
 fi
 
